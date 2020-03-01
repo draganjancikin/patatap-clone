@@ -12,20 +12,41 @@
   <!-- Paper.js code space -->
   <script type="text/paperscript" canvas="myCanvas">
     
+    var screenWidth;
+    var screenHeight;
+
     function onKeyDown(event) {
       
-      // windows size
-      var screenWidth = view._bounds.width;
-      var screenHeight = view._bounds.height;
-      console.log(screenWidth + " x " + screenHeight + "px");
-
-	    // When a key is pressed, set the content of the text item:
+      screenWidth = view._bounds.width;
+      screenHeight = view._bounds.height;
+      
+	    // When a key is pressed ... 
       console.log("Pressed is: " + event.key);
       
       // make circle
-      var myCircle = new Path.Circle(new Point(100, 70), 50);
+      var myCircle = new Path.Circle(new Point(getRandomCirclePosition()), getRandomCircleSize());
       myCircle.fillColor = 'red';
     
+    }
+
+    // get random circle position between 0,0 and screenWidth, screenHeight
+    function getRandomCirclePosition() {
+      var position = {};
+      position.x = getRandomNumber(0, screenWidth);
+      position.y = getRandomNumber(0, screenHeight);
+      return position;
+    }
+
+    // get random circle size
+    function getRandomCircleSize (){
+      return getRandomNumber(0, 300);
+    }
+
+    // get random number between minNum and maxNum
+    function getRandomNumber(minNum, maxNum) {
+      var min = Math.ceil(minNum);
+      var max = Math.floor(maxNum);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
   </script>

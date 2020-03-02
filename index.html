@@ -15,27 +15,61 @@
     var screenWidth;
     var screenHeight;
 
+    var dataSound = {
+      q: {  sound: new Howl( { src: ["lib/sounds/bubbles.mp3"]       } )  },
+      w: {  sound: new Howl( { src: ["lib/sounds/clay.mp3"]          } )  },
+      e: {  sound: new Howl( { src: ["lib/sounds/confetti.mp3"]      } )  },
+      r: {  sound: new Howl( { src: ["lib/sounds/corona.mp3"]        } )  },
+      t: {  sound: new Howl( { src: ["lib/sounds/dotted-spiral.mp3"] } )  },
+      z: {  sound: new Howl( { src: ["lib/sounds/flash-1.mp3"]       } )  },
+      u: {  sound: new Howl( { src: ["lib/sounds/flash-2.mp3"]       } )  },
+      i: {  sound: new Howl( { src: ["lib/sounds/flash-3.mp3"]       } )  },
+      o: {  sound: new Howl( { src: ["lib/sounds/glimmer.mp3"]       } )  },
+      p: {  sound: new Howl( { src: ["lib/sounds/pinwheel.mp3"]      } )  },
+      a: {  sound: new Howl( { src: ["lib/sounds/piston-1.mp3"]      } )  },
+      s: {  sound: new Howl( { src: ["lib/sounds/piston-2.mp3"]      } )  },
+      d: {  sound: new Howl( { src: ["lib/sounds/piston-3.mp3"]      } )  },
+      f: {  sound: new Howl( { src: ["lib/sounds/prism-1.mp3"]       } )  },
+      g: {  sound: new Howl( { src: ["lib/sounds/prism-2.mp3"]       } )  },
+      h: {  sound: new Howl( { src: ["lib/sounds/prism-3.mp3"]       } )  },
+      j: {  sound: new Howl( { src: ["lib/sounds/splits.mp3"]        } )  },
+      k: {  sound: new Howl( { src: ["lib/sounds/squiggle.mp3"]      } )  },
+      l: {  sound: new Howl( { src: ["lib/sounds/strike.mp3"]        } )  },
+      y: {  sound: new Howl( { src: ["lib/sounds/suspension.mp3"]    } )  },
+      x: {  sound: new Howl( { src: ["lib/sounds/timer.mp3"]         } )  },
+      c: {  sound: new Howl( { src: ["lib/sounds/ufo.mp3"]           } )  },
+      v: {  sound: new Howl( { src: ["lib/sounds/veil.mp3"]          } )  },
+      b: {  sound: new Howl( { src: ["lib/sounds/wipe.mp3"]          } )  },
+      n: {  sound: new Howl( { src: ["lib/sounds/zig-zag.mp3"]       } )  },
+      m: {  sound: new Howl( { src: ["lib/sounds/bubbles.mp3"]       } )  },
+    };
+    
     function onKeyDown(event) {
       // When a key is pressed ...
-
+      
       // read screen width and height
       screenWidth = view._bounds.width;
       screenHeight = view._bounds.height;
       
-	    // read which key is pressed
-      console.log("Pressed is: " + event.key);
+      // check if pressed key have a sound in dataSound object
+      if (dataSound[event.key]) {
+        
+        // make circle
+        var myCircle = new Shape.Circle({
+          center: getRandomCirclePosition(),
+          radius: getRandomCircleSize(),
+          fillColor: getRandomColor(),
+          onFrame: function(event) {
+            this.scale(0.9);
+            this.fillColor.hue -= 1;
+          }
+        });     
+        
+        // play sound
+        dataSound[event.key].sound.play();
       
-      // make circle
-      var myCircle = new Shape.Circle({
-	      center: getRandomCirclePosition(),
-	      radius: getRandomCircleSize(),
-        fillColor: getRandomColor(),
-        onFrame: function(event) {
-          this.scale(0.9);
-          this.fillColor.hue -= 1;
-        }
-      });
-   
+      }
+
     }
 
     // get random circle position between 0,0 and screenWidth, screenHeight
